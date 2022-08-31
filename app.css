@@ -1,0 +1,50 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+    transition: all 0.5s ease;
+}
+
+body{
+ font-family: sans-serif;
+}
+
+.calculator{
+    width: 240px;
+}
+
+.keyboard{
+    text-align: center;
+}
+
+.buttons{
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+}
+
+.buttons.Two{
+width: 120px;
+height: 50px;
+font-size: 20px;
+}
+
+#screen{
+    height: 50px;
+    font-size: 24px;
+}
+
+.screen{
+    width: 236px;
+    border: 1px solid black;
+}
+
+.container{
+    margin-left: 35%;
+    margin-top: 10%;
+}
+
+.calculator.dark{
+    border: 2px solid black
+}
