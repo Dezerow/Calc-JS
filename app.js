@@ -13,6 +13,7 @@ buttons.forEach((button) => {
   button.onclick = () => {
     if (button.id == "C") {
       screen.innerText = 0;
+      previousNumber = 0;
     } else if (button.id == "back") {
       let string = screen.innerText.toString();
       screen.innerText = string.substr(0, string.length - 1);
@@ -34,32 +35,40 @@ buttons.forEach((button) => {
         screen.innerText += button.id;
       }
     } else if (button.id == "+") {
-      previousNumber += parseFloat(screen.innerText);
-      screen.innerText = "";
+      if (screen.innerText != "") {
+        previousNumber += parseFloat(screen.innerText);
+        screen.innerText = "";
+      }
       mathOption = "+";
     } else if (button.id == "-") {
-      if (previousNumber == 0) {
-        previousNumber += parseFloat(screen.innerText);
-      } else {
-        previousNumber -= parseFloat(screen.innerText);
+      if (screen.innerText !== "") {
+        if (previousNumber == 0) {
+          previousNumber += parseFloat(screen.innerText);
+        } else {
+          previousNumber -= parseFloat(screen.innerText);
+        }
+        screen.innerText = "";
       }
-      screen.innerText = "";
       mathOption = "-";
     } else if (button.id == "*") {
-      if (previousNumber == 0) {
-        previousNumber += parseFloat(screen.innerText);
-      } else {
-        previousNumber *= parseFloat(screen.innerText);
+      if (screen.innerText != "") {
+        if (previousNumber == 0) {
+          previousNumber += parseFloat(screen.innerText);
+        } else {
+          previousNumber *= parseFloat(screen.innerText);
+        }
+        screen.innerText = "";
       }
-      screen.innerText = "";
       mathOption = "*";
     } else if (button.id == "/") {
-      if (previousNumber == 0) {
-        previousNumber += parseFloat(screen.innerText);
-      } else {
-        previousNumber /= parseFloat(screen.innerText);
+      if (screen.innerText != "") {
+        if (previousNumber == 0) {
+          previousNumber += parseFloat(screen.innerText);
+        } else {
+          previousNumber /= parseFloat(screen.innerText);
+        }
+        screen.innerText = "";
       }
-      screen.innerText = "";
       mathOption = "/";
     } else if (button.id == "&radic") {
       if (previousNumber == 0 || previousNumber == "") {
@@ -84,26 +93,31 @@ buttons.forEach((button) => {
     } else if (button.id == ".") {
       screen.innerText += ".";
     } else if (button.id == "=") {
-      actualNumber = parseFloat(screen.innerText);
-      let result;
-      switch (mathOption) {
-        case "+":
-          result = parseFloat(actualNumber) + parseFloat(previousNumber);
-          break;
-        case "-":
-          result = parseFloat(previousNumber) - parseFloat(actualNumber);
-          break;
-        case "*":
-          result = parseFloat(previousNumber) * parseFloat(actualNumber);
-          break;
-        case "/":
-          result = parseFloat(previousNumber) / parseFloat(actualNumber);
-          break;
-      }
+      if (!screen.innerText == "") {
+        actualNumber = parseFloat(screen.innerText);
+        let result;
+        switch (mathOption) {
+          case "+":
+            result = parseFloat(actualNumber) + parseFloat(previousNumber);
+            break;
+          case "-":
+            result = parseFloat(previousNumber) - parseFloat(actualNumber);
+            break;
+          case "*":
+            result = parseFloat(previousNumber) * parseFloat(actualNumber);
+            break;
+          case "/":
+            result = parseFloat(previousNumber) / parseFloat(actualNumber);
+            break;
+          default:
+            result = 0;
+            break;
+        }
 
-      screen.innerText = result;
-      previousNumber = 0;
-      actualNumber = 0;
+        screen.innerText = result;
+        previousNumber = 0;
+        actualNumber = 0;
+      }
     }
   };
 });
